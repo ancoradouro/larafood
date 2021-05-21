@@ -3,7 +3,7 @@
 @section('title', 'Planos')
 
 @section('content_header')
-    <h1>Planos</h1>
+    <h1>Planos <a href="{{ route('plans.create') }}" class="btn btn-dark">ADD</a> </h1>
 @stop
 
 @section('content')
@@ -30,6 +30,9 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="card-footer">
+            {!! $plans->links() !!}
         </div>
     </div>
 @stop
