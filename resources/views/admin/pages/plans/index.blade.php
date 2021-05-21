@@ -16,8 +16,12 @@
         <div class="card-header">
         <form action="{{ route('plans.search') }}" method="post" class="form form-inline">
                 @csrf
-                <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}">
-                <button type="submit" class="btn btn-dark">Filtrar</button>
+                <div class="input-group mb-3">
+                    <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}" aria-label="Nome" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-dark btn-outline-secondary" type="button">Filtro</button>
+                    </div>
+                </div>
             </form>
         </div>
         <div class="card-body">
