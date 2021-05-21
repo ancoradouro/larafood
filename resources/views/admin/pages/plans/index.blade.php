@@ -18,12 +18,13 @@
                 @csrf
                 <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}">
                 <button type="submit" class="btn btn-dark"> <i class="fas fa-filter"></i> Filtrar</button>
-                <div class="input-group mb-3">
+
+                {{-- <div class="input-group mb-3">
                     <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}" aria-label="Nome" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-dark btn-outline-secondary" type="button">Filtro</button>
+                        <button class="btn btn-dark btn-outline-secondary" type="button"> <i class="fas fa-filter"></i> Filtrar</button>
                     </div>
-                </div>
+                </div> --}}
             </form>
         </div>
         <div class="card-body">
