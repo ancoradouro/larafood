@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 class PlanController extends Controller
 {
     private $repository;
+    protected $num_pagination = 4;
 
     public function __construct(Plan $plan)
     {
@@ -18,7 +19,7 @@ class PlanController extends Controller
 
     public function index()
     {
-        $plans = $this->repository->latest()->paginate(3);
+        $plans = $this->repository->latest()->paginate($this->num_pagination);
 
         return view('admin.pages.plans.index', [
             'plans' => $plans,
