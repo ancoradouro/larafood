@@ -35,7 +35,10 @@ class PlanController extends Controller
         //dd($request->all());
         $data = $request->all();
         $data['url'] = Str::kebab($request->name);
+        //dd($data);
         $this->repository->create($data);
+
+        //$this->repository->create($request->all());
 
         return redirect()->route('plans.index');
     }
@@ -76,5 +79,29 @@ class PlanController extends Controller
             'plans' => $plans,
             'filters' => $filters,
         ]);
+    }
+
+    public function edit($url)
+    {
+        $plan = $this->repository->where('url', $url)->first();
+
+        if (!$plan)
+            return redirect()->back();
+
+        return view('admin.pages.plans.edit', [
+            'plan' => $plan
+        ]);
+    }
+
+    public function update(Request $request, $url)
+    {
+        $plan = $this->repository->where('url', $url)->first();
+
+        if (!$plan)
+            return redirect()->back();
+
+        $plan->update($request->all());
+
+        return redirect()->route('plans.index');
     }
 }
