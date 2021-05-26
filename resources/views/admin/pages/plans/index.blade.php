@@ -16,15 +16,14 @@
         <div class="card-header">
         <form action="{{ route('plans.search') }}" method="post" class="form form-inline">
                 @csrf
-                <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}">
-                <button type="submit" class="btn btn-dark"> <i class="fas fa-filter"></i> Filtrar</button>
-
-                {{-- <div class="input-group mb-3">
+                {{-- <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}"> --}}
+                
+                <div class="input-group mb-3">
                     <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}" aria-label="Nome" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-dark btn-outline-secondary" type="button"> <i class="fas fa-filter"></i> Filtrar</button>
+                        <button class="btn btn-dark btn-outline-secondary" type="sumit" > <i class="fas fa-filter"></i> Filtrar</button>
                     </div>
-                </div> --}}
+                </div> 
             </form>
         </div>
         <div class="card-body">
@@ -41,8 +40,8 @@
                         <tr>
                             <td>{{ $plan->name }}</td>
                             <td>R$ {{ number_format($plan->price, 2, ',', '.') }}</td>
-                            <td style="width:180px;">
-                                <a href="{{ route('plans.edit', $plan->url) }}" class="btn btn-info"> Editar</a>
+                            <td style="width:200px;">
+                                <a href="{{ route('plans.edit', $plan->url) }}" class="btn btn-info"> <i class="fas fa-edit"></i> Editar</a>
                                 <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-warning"> <i class="fas fa-eye"></i> Ver</a>
                             </td>
                         </tr>
