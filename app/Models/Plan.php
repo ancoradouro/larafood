@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
 
+
 class Plan extends Model
 {
     //use HasFactory;
@@ -15,6 +16,11 @@ class Plan extends Model
     public function __construct()
     {
         Paginator::useBootstrap();
+    }
+
+    public function details()
+    {
+        return $this->hasMany(DetailPlan::class);
     }
 
     public function search($filter = null)

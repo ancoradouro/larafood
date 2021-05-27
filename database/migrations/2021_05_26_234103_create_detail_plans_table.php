@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlansTable extends Migration
+class CreateDetailPlansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,16 @@ class CreatePlansTable extends Migration
      */
     public function up()
     {
+        if (!Schema::hasTable('detail_plans')) {
 
-        if (!Schema::hasTable('plans')) {
-            
-            Schema::create('plans', function (Blueprint $table) {
+            Schema::create('detail_plans', function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->String('name')->unique();
-                $table->String('url')->unique();
-                $table->Double('price', 10, 2);
-                $table->String('description')->nullable();
+                $table->unsignedBigInteger('plan_id');
+                $table->String('name');
                 $table->timestamps();
-                
+                $table->foreign('plans_id')->references('id')->on('plans')->onUpdate('cascade')->onDelete('cascade');
             });
-
-           //
+            
         }
     }
 
@@ -37,6 +33,6 @@ class CreatePlansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plans');
+        Schema::dropIfExists('detail_plans');
     }
 }

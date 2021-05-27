@@ -35,15 +35,19 @@ class PlanController extends Controller
 
     public function store(StoreUpdatePlan $request)
     {
+        
         $plan = new Plan();
         $plan->name = $request->name;
         $plan->description = $request->description;
         $plan->url = Str::kebab($request->name);
         $plan->price = $request->price;
         $plan->save();
+        
+        //$this->repository->create($request->all());
 
-        //return redirect('/index')->with('message', 'Plano criado com sucesso');
-        return redirect()->route('plans.index');
+        //return redirect('/plans')->with('message', 'Plano criado com sucesso');
+        return redirect()->route('plans.index', ['message' => 'Deu certo']); //passa parametro assim ?message=Deu%20certo
+        
     }
 
     public function show($url)
@@ -103,6 +107,6 @@ class PlanController extends Controller
 
         $plan->update($request->all());
 
-        return redirect()->route('plans.index');
+        return redirect()->route('plans.index')->with('success', 'Salvo com sucesso'); //https://stackoverflow.com/questions/19838978/laravel-redirect-back-with-message
     }
 }

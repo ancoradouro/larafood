@@ -7,7 +7,7 @@
 
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('plans.index') }}" class="active">Planos</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('plans.index') }}" class="active">Planos</a></li>
     </ol>
 @stop
 
@@ -27,6 +27,13 @@
             </form>
         </div>
         <div class="card-body">
+
+            @if (\Session::has('success'))
+                <div class="alert alert-success">
+                    <p>{!! \Session::get('success') !!}</p>
+                </div>
+            @endif
+
             <table class="table table-condensed">
                 <thead>
                     <tr>
@@ -40,7 +47,8 @@
                         <tr>
                             <td>{{ $plan->name }}</td>
                             <td>R$ {{ number_format($plan->price, 2, ',', '.') }}</td>
-                            <td style="width:200px;">
+                            <td style="width:300px;">
+                                <a href="{{ route('details.plan.index', $plan->id) }}" class="btn btn-primary"> <i class="fas fa-info-circle"></i> Detalhes</a>
                                 <a href="{{ route('plans.edit', $plan->url) }}" class="btn btn-info"> <i class="fas fa-edit"></i> Editar</a>
                                 <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-warning"> <i class="fas fa-eye"></i> Ver</a>
                             </td>

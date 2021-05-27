@@ -25,7 +25,7 @@ class StoreUpdatePlan extends FormRequest
     {
         $url = $this->segment(3);
         return [
-            'name' => 'required|min:3|max:255|unique:plans,name,{$url},url',
+            'name' => "required|min:3|max:255|unique:plans,name,{$url},url",
             'price' => "required|regex:/^\d+(\.\d{1,2})?$/",
             'description' => 'required|min:3|max:255,description',            
         ];
