@@ -10,6 +10,8 @@ class DetailPlan extends Model
     //use HasFactory;
 
     protected $table = 'detail_plans';
+
+    protected $fillable = ['name'];
     
     public function plan()
     {

@@ -28,11 +28,7 @@
         </div>
         <div class="card-body">
 
-            @if (\Session::has('success'))
-                <div class="alert alert-success">
-                    <p>{!! \Session::get('success') !!}</p>
-                </div>
-            @endif
+            @include('admin.includes.alerts')
 
             <table class="table table-condensed">
                 <thead>

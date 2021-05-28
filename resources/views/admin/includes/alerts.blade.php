@@ -5,3 +5,21 @@
         @endforeach
     </div>
 @endif
+
+@if (\Session::has('success'))
+    <div class="alert alert-success">
+        <p>{!! \Session::get('success') !!}</p>
+    </div>
+@endif
+
+@if (session('message'))
+    <div class="alert alert-info">
+        <p>{{ session('message') }}</p>
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger">
+        <p>{{ session('error') }}</p>
+    </div>
+@endif
