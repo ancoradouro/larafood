@@ -2,8 +2,20 @@
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function(){
-
     
+
+    /**
+     * Routes Permissions
+     */
+    Route::any('permissions/search', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionController@search')->name('permissions.search');
+    Route::resource('permissions', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionController');
+    
+    /**
+     * Routes Profile
+     */
+    Route::any('profiles/search', 'App\\Http\\Controllers\\Admin\\ACL\\ProfileController@search')->name('profiles.search');
+    Route::resource('profiles', 'App\\Http\\Controllers\\Admin\\ACL\\ProfileController');
+
     /**
      * Routes Plans
      */

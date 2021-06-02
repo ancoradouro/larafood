@@ -54,10 +54,13 @@ class StoreUpdatePlan extends FormRequest
     {
         return [
             'name.required' => ':attribute é um campo obrigatório.',
+            'name.max' => 'O :attribute deve ter no máximo 255 caracteres.',
+            'name.min' => ':attribute deve ter no minimo 3 caracteres.',
             'price.required' => ':attribute é obrigatório.',
             'price.regex' => ':attribute deve ser um número.',
             'description.required' => 'Informe a :attribute.',
             'description.min' => ':attribute deve ter no minimo 3 caracteres.',
+            'description.max' => 'O :attribute deve ter no máximo 255 caracteres.',
         ];
     }
 

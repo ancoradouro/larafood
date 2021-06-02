@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUpdateDetailPlan extends FormRequest
+class StoreUpdateProfile extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,10 @@ class StoreUpdateDetailPlan extends FormRequest
      */
     public function rules()
     {
+        $id = $this->segment(3);
         return [
-            'name' => "required|min:3|max:255",
+            'name' => "required|min:3|max:255|unique:profiles,name,{$id},id",
+            'description' => 'nullable|min:3|max:255',
         ];
     }
 
@@ -37,9 +39,9 @@ class StoreUpdateDetailPlan extends FormRequest
     {
         return [
             'name' => 'Nome',
+            'description' => 'Descrição',
         ];
     }
-
 
     /**
      * Get the error messages for the defined validation rules.
@@ -52,6 +54,8 @@ class StoreUpdateDetailPlan extends FormRequest
             'name.required' => ':attribute é um campo obrigatório.',
             'name.max' => 'O :attribute deve ter no máximo 255 caracteres.',
             'name.min' => ':attribute deve ter no minimo 3 caracteres.',
+            'description.max' => 'O :attribute deve ter no máximo 255 caracteres.',
+            'description.min' => ':attribute deve ter no minimo 3 caracteres.',
         ];
     }
 }
