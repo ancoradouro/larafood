@@ -44,7 +44,7 @@
                             <td style="width:300px;">
                                 <a href="{{ route('details.plan.index', $plan->id) }}" class="btn btn-primary"> <i class="fas fa-info-circle"></i> Detalhes</a>
                                 <a href="{{ route('plans.edit', $plan->url) }}" class="btn btn-info"> <i class="fas fa-edit"></i> Editar</a>
-                                <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-warning"> <i class="fas fa-eye"></i> Ver</a>
+                                <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-warning"> <i class="fas fa-eye"></i></a>
                             </td>
                         </tr>
                     @endforeach

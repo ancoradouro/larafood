@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class PlanController extends Controller
 {
-    private $repository;
-    protected $num_pagination = 10;
+    private $repository,$num_pagination = 10;
 
     public function __construct(Plan $plan)
     {

@@ -23,3 +23,10 @@
         <p>{{ session('error') }}</p>
     </div>
 @endif
+
+@if (session('info'))
+    <div class="alert alert-warning">
+        <p>{{ session('info') }}</p>
+    </div>
+@endif
+

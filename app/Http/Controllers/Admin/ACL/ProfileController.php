@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 class ProfileController extends Controller
 {
 
-    protected $repository;
+    protected $repository, $num_pagination = 10;
+
 
     public function __construct(Profile $profile)
     {
@@ -23,7 +24,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $profiles = $this->repository->paginate();
+        $profiles = $this->repository->paginate($this->num_pagination);
         return view('admin.pages.profiles.index', compact('profiles'));
     }
 
@@ -121,7 +122,7 @@ class ProfileController extends Controller
                     ->where('name', $request->filter)
                     ->orWhere('description', 'LIKE', "%{$request->filter}%");
             }
-        })->paginate();
+        })->paginate($this->num_pagination);
 
         return view('admin.pages.profiles.index', compact('profiles', 'filters'));
     }
