@@ -16,8 +16,6 @@
         <div class="card-header">
         <form action="{{ route('plans.search') }}" method="post" class="form form-inline">
                 @csrf
-                {{-- <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}"> --}}
-                
                 <div class="input-group mb-3">
                     <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}" aria-label="Nome" aria-describedby="basic-addon2">
                     <div class="input-group-append">
