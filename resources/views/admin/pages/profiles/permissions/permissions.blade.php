@@ -26,7 +26,9 @@
                     <tr>
                         <td>{{ $permission->name }}</td>
                         <td style="width:250px;">
-                            <a href="{{ route('profiles.permission.detach', [$profile->id, $permission->id]) }}" class="btn btn-danger"><i class="fas fa-unlink"></i> Desvincular</a>
+                            <a href="{{ route('profiles.permission.detach', [$profile->id, $permission->id]) }}" class="btn btn-danger">
+                                <i class="fas fa-unlink"></i> Desvincular
+                            </a>
                         </td>
                     </tr>
                 @endforeach
