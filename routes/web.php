@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\{
     PlanController
 };
 
-Route::prefix('admin')->group(function(){
+Route::middleware(['auth'])->prefix('admin')->group(function(){
     
     /**
      * Routes Plan X Profile
@@ -68,4 +68,11 @@ Route::prefix('admin')->group(function(){
     Route::get('/', 'App\\Http\\Controllers\\Admin\\PlanController@index')->name('admin.index');
 });
 
-Route::get('/', function () { return view('welcome'); });
+Route::get('/', function () {
+    return view('admin.pages.plans.create');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+//Route::get('/', function () { return view('welcome'); });
+
