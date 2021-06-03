@@ -1,8 +1,21 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\{
+    PlanController
+};
 
 Route::prefix('admin')->group(function(){
     
+    /**
+     * Routes Plan X Profile
+     */
+    Route::get('plans/{id}/profile/{idprofile}/detach', 'App\\Http\\Controllers\\Admin\\ACL\\PlanProfileController@detachProfilePlan')->name('plans.profile.detach');
+    Route::post('plans/{id}/profiles', 'App\\Http\\Controllers\\Admin\\ACL\\PlanProfileController@attachProfilePlan')->name('plans.profiles.attach');
+    Route::any('plans/{id}/profiles/create', 'App\\Http\\Controllers\\Admin\\ACL\\PlanProfileController@profilesAvailable')->name('plans.profiles.available');
+    Route::get('plans/{id}/profiles', 'App\\Http\\Controllers\\Admin\\ACL\\PlanProfileController@profiles')->name('plans.profiles');
+    Route::get('profiles/{id}/plans', 'App\\Http\\Controllers\\Admin\\ACL\\PlanProfileController@plans')->name('profiles.plans');
+
 
     /**
      * Routes Permissions X Profile
@@ -35,7 +48,7 @@ Route::prefix('admin')->group(function(){
     Route::delete('plans/{url}', 'App\\Http\\Controllers\\Admin\\PlanController@destroy')->name('plans.destroy');
     Route::get('plans/{url}', 'App\\Http\\Controllers\\Admin\\PlanController@show')->name('plans.show');
     Route::post('plans', 'App\\Http\\Controllers\\Admin\\PlanController@store')->name('plans.store');
-    Route::get('plans', 'App\\Http\\Controllers\\Admin\\PlanController@index')->name('plans.index');
+    Route::get('plans', [PlanController::class, 'index'])->name('plans.index');
 
     /**
      * Routes Details Plan
@@ -55,6 +68,4 @@ Route::prefix('admin')->group(function(){
     Route::get('/', 'App\\Http\\Controllers\\Admin\\PlanController@index')->name('admin.index');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () { return view('welcome'); });

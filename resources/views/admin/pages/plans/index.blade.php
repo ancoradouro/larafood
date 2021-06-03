@@ -33,7 +33,7 @@
                     <tr>
                         <th>Nome</th>
                         <th>Preço</th>
-                        <th style="width:180px;">Ações</th>
+                        <th style="width:350px;">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,10 +41,11 @@
                         <tr>
                             <td>{{ $plan->name }}</td>
                             <td>R$ {{ number_format($plan->price, 2, ',', '.') }}</td>
-                            <td style="width:300px;">
+                            <td style="width:350px;">
                                 <a href="{{ route('details.plan.index', $plan->id) }}" class="btn btn-primary"> <i class="fas fa-info-circle"></i> Detalhes</a>
                                 <a href="{{ route('plans.edit', $plan->url) }}" class="btn btn-info"> <i class="fas fa-edit"></i> Editar</a>
                                 <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-warning"> <i class="fas fa-eye"></i></a>
+                                <a href="{{ route('plans.profiles', $plan->id) }}" class="btn btn-warning"> <i class="fas fa-address-book"></i></a>
                             </td>
                         </tr>
                     @endforeach

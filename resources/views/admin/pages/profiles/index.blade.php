@@ -24,17 +24,18 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th style="width:250px;">Ações</th>
+                    <th style="width:300px;">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($profiles as $profile)
                     <tr>
                         <td>{{ $profile->name }}</td>
-                        <td style="width:250px;">
+                        <td style="width:300px;">
                             <a href="{{ route('profiles.edit', $profile->id) }}" class="btn btn-info"><i class="fas fa-edit"></i>  Editar</a>
                             <a href="{{ route('profiles.show', $profile->id) }}" class="btn btn-warning"> <i class="fas fa-eye"></i> Ver</a>
                             <a href="{{ route('profiles.permissions', $profile->id) }}" class="btn btn-warning"> <i class="fas fa-lock"></i></a>
+                            <a href="{{ route('profiles.plans', $profile->id) }}" class="btn btn-warning"> <i class="fas fa-list-alt"></i></a>
                         </td>
                     </tr>
                 @endforeach

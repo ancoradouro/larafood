@@ -23,11 +23,37 @@ class Plan extends Model
         return $this->hasMany(DetailPlan::class);
     }
 
+    public function profiles()
+    {
+        return $this->belongsToMany(Profile::class);
+    }    
+
     public function search($filter = null)
     {
         return $this->where('name', 'LIKE', "%{$filter}%")
                     ->orWhere('description', 'LIKE', "%{$filter}%")
                     ->paginate($this->num_pagination);
+    }
+
+    /**
+     * Profiles not linked with this plan
+     */
+    public function profilesAvailable($filter = null)
+    {
+        $profiles = Profile::whereNotIN('profiles.id', function($query){
+            $query->select('plan_profile.profile_id');
+            $query->from('plan_profile');
+            $query->whereRaw("plan_profile.plan_id={$this->id}");
+        })
+        ->where(function($queryFilter) use($filter){
+            if ($filter)
+                $queryFilter->where('permissions.name', 'LIKE', "%$filter%");
+        })
+        ->paginate();
+        //->toSql();
+        //dd($permissions);
+
+        return $profiles;
     }
 
 }

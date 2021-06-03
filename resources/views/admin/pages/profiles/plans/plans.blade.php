@@ -1,13 +1,14 @@
 @extends('adminlte::page')
 
-@section('title', 'Perfis da Permissão')
+@section('title', "Planos do perfil {$profile->name}")
 
 @section('content_header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('permissions.index') }}" class="active">Perfis</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('profiles.index') }}">Perfis</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('profiles.plans', $profile->id) }}" class="active">Planos</a></li>
     </ol>
-    <h1>Perfis da Permissão <strong> {{ $permission->name }} </strong></h1>
+    <h1>Planos do perfil <strong> {{ $profile->name }} </strong></h1>
 @stop
 
 @section('content')
@@ -21,13 +22,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($profiles as $profile)
+                @foreach ($plans as $plan)
                     <tr>
-                        <td>{{ $profile->name }}</td>
+                        <td>{{ $plan->name }}</td>
                         <td style="width:250px;">
-                            <a href="{{ route('profiles.permission.detach', [$profile->id, $permission->id]) }}" class="btn btn-danger">
-                                <i class="fas fa-unlink"></i> Desvincular
-                            </a>
+                            <a href="{{ route('plans.profile.detach', [$plan->id, $profile->id]) }}" class="btn btn-danger">Desvincular</a>
                         </td>
                     </tr>
                 @endforeach
@@ -36,10 +35,10 @@
     </div>
     <div class="card-footer">
         @if (isset($filters))
-            {{-- {!! $profiles->links() !!} --}}
-            {!! $profiles->appends($filters)->links() !!}
+            {{-- {!! $plans->links() !!} --}}
+            {!! $plans->appends($filters)->links() !!}
         @else
-            {!! $profiles->links() !!}
+            {!! $plans->links() !!}
         @endif
     </div>
 </div>
