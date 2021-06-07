@@ -17,6 +17,12 @@
                 @csrf
                 @method('PUT')
                 @include('admin.pages.plans._partials.form')
+                
+            </form>
+            <form action="{{ route('plans.destroy', $plan->url) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger"> <i class="fas fa-minus-square"></i> Deletar o plano {{ $plan->name }}</button>
             </form>
         </div>
     </div>

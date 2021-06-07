@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('title', "Detalhes o detalhe do Plano {$detail->name}")
-d
+
 @section('content_header')
     <h1>Editar o detalhe {{ $detail->name }}</h1>
 
@@ -27,7 +27,7 @@ d
             <form action="{{ route('details.plan.destroy', [$plan->url, $detail->id] )}}" method="post">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">Deletar o Detalhe "{{ $detail->name}}", do plano "{{ $plan->name }}"</button>
+                <button type="submit" class="btn btn-danger"> <i class="fas fa-trash"></i> Deletar o Detalhe "{{ $detail->name}}", do plano "{{ $plan->name }}"</button>
             </form>
         </div>
     </div>

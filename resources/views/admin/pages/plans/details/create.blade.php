@@ -3,7 +3,7 @@
 @section('title', "Adicionar novo detalhe do Plano {$plan->name}")
 
 @section('content_header')
-    <h1>Adiciconar novo detalhe do plano {{ $plan->name }}</h1>
+    <h1>Adicionar novo detalhe do plano {{ $plan->name }}</h1>
 
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>

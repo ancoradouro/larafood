@@ -26,7 +26,7 @@
             <form action="{{ route('profiles.destroy', $profile->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger"> <i class="fas fa-minus-square"></i> DELETAR O PERFIL {{ $profile->name }}</button>
+                <button type="submit" class="btn btn-danger"> <i class="fas fa-trash"></i> Deletar o Perfil {{ $profile->name }}</button>
             </form>
         </div>
     </div>

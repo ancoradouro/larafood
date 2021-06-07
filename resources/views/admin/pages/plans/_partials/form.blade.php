@@ -15,5 +15,5 @@
     <input type="text" name="description" class="form-control" placeholder="Descrição:" value="{{ $plan->description ?? old('description') }}">
 </div>
 <div class="form-group">
-    <button type="submit" class="btn btn-dark">Salvar</button>
+    <button type="submit" class="btn btn-dark"> <i class="fas fa-save"></i> Salvar</button>
 </div>

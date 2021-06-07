@@ -8,5 +8,5 @@
 </div>
 
 <div class="form-group">
-    <button type="submit" class="btn btn-info">Enviar</button>
+    <button type="submit" class="btn btn-info"> <i class="fas fa-save"></i> Enviar</button>
 </div>
