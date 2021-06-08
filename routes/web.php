@@ -81,7 +81,11 @@ Route::get('/', function () {
     return view('admin.pages.plans.create');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/', 'App\Http\Controllers\Site\SiteController@index')->name('home-index');
+
 require __DIR__.'/auth.php';
 
 //Route::get('/', function () { return view('welcome'); });
+
+
 
