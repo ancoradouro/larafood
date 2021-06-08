@@ -20,7 +20,7 @@ class CreateDetailPlansTable extends Migration
                 $table->unsignedBigInteger('plan_id');
                 $table->String('name');
                 $table->timestamps();
-                $table->foreign('plans_id')->references('id')->on('plans')->onUpdate('cascade')->onDelete('cascade');
+                $table->foreign('plan_id')->references('id')->on('plans');//->onUpdate('cascade')->onDelete('cascade');
             });
             
         }

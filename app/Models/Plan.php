@@ -15,8 +15,10 @@ class Plan extends Model
 
     public function __construct()
     {
-        Paginator::useBootstrap();
+       // Paginator::useBootstrap();
     }
+
+
 
     public function details()
     {
@@ -26,7 +28,14 @@ class Plan extends Model
     public function profiles()
     {
         return $this->belongsToMany(Profile::class);
-    }    
+    }
+
+    public function tenants()
+    {
+        return $this->hasMany(Tenant::class);
+    }
+
+
 
     public function search($filter = null)
     {

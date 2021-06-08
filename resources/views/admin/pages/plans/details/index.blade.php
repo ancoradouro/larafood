@@ -43,8 +43,7 @@
         <div class="card-footer">
             @if (isset($filters))
                 {!! $details->appends($filters)->links() !!}
-            @else
-                {!! $details->links() !!}
+           
             @endif
         </div>
     </div>

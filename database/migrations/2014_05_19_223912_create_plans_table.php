@@ -22,11 +22,9 @@ class CreatePlansTable extends Migration
                 $table->String('url')->unique();
                 $table->Double('price', 10, 2);
                 $table->String('description')->nullable();
-                $table->timestamps();
-                
+                $table->timestamps();                
             });
 
-           //
         }
     }
 

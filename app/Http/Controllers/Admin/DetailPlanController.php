@@ -53,7 +53,7 @@ class DetailPlanController extends Controller
 
 
         //$data = $request->all();
-        //$data['plan_id'] = $plan->id;
+        //$data['plans_id'] = $plan->id;
         //$this->repository->create();
         $plan->details()->create($request->all());
 
@@ -67,7 +67,7 @@ class DetailPlanController extends Controller
         if (!$plan || !$detail) {
             return redirect()->back();
         }
-        return view('admin.pages.plans.details.create',[
+        return view('admin.pages.plans.details.edit',[
             'plan' => $plan,
             'detail' => $detail,
         ]);

@@ -64,9 +64,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
      */
     Route::get('plans/{url}/details/create', [DetailPlanController::class, 'create'])->name('details.plan.create');
     Route::delete('plans/{id}/details/{idDetails}', [DetailPlanController::class, 'destroy'])->name('details.plan.destroy');
-    Route::get('plans/{id}/details/{idDetails}', [DetailPlanController::class, 'show'])->name('details.plan.show');
-    Route::put('plans/{id}/details/{idDetails}', [DetailPlanController::class, 'update'])->name('details.plan.update');
     Route::get('plans/{id}/details/{idDetails}/edit', [DetailPlanController::class, 'edit'])->name('details.plan.edit');
+    Route::get('plans/{id}/details/{idDetails}', [DetailPlanController::class, 'show'])->name('details.plan.show');    
+    Route::put('plans/{id}/details/{idDetails}', [DetailPlanController::class, 'update'])->name('details.plan.update');
     Route::post('plans/{id}/details', [DetailPlanController::class, 'store'])->name('details.plan.store');
     Route::get('plans/{url}/details', [DetailPlanController::class, 'index'])->name('details.plan.index');
     
