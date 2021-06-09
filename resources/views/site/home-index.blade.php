@@ -22,14 +22,14 @@
                             <span class="duration">Por Mês</span>
                         </div>
                         <ul>
-                        @foreach ($plan->details as $detail)
-                            <li>{{ $detail->name }}</li>
-                        @endforeach
+                            @foreach ($plan->details as $detail)
+                                <li>{{ $detail->name }}</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
                 <div class="pricingTable-signup">
-                    <a href="#">Assinar</a>
+                    <a href="{{ route('register', $plan->url) }}">Assinar</a>
                 </div>
             </div>
 

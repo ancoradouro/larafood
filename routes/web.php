@@ -2,16 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
-    PlanController
+    PlanController,
+    DetailPlanController
 };
 use App\Http\Controllers\Admin\ACL\{
-    PlanProfileController
-};
-use App\Http\Controllers\Admin\ACL\{
+    PlanProfileController,
     PermissionProfileController
 };
-use App\Http\Controllers\Admin\{
-    DetailPlanController
+use App\Http\Controllers\Site\{
+    SiteController
 };
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){
@@ -77,11 +76,21 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::get('/',  [PlanController::class, 'index'])->name('admin.index');
 });
 
+
+
 Route::get('/', function () {
     return view('admin.pages.plans.create');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/', 'App\Http\Controllers\Site\SiteController@index')->name('home-index');
+/**
+ * Site
+ */
+Route::get('/register/{$url}', [SiteController::class, 'plan'])->name('plan.subscription');
+Route::get('/', [SiteController::class, 'index'])->name('home-index');
+
+
+
+
 
 require __DIR__.'/auth.php';
 

@@ -9,8 +9,23 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register.store') }}">
             @csrf
+
+            <!-- Plano -->
+            <div>
+                <x-label for="plano" :value="__('Plano')" />
+
+                <p><strong>Plano: </strong> {{ $plan->name ?? '-' }}</p>
+                <input id="plan_id" type="hidden" name="plan_id" value="{{ $plan->id }}" />
+            </div>
+
+            <!-- CNPJ -->
+            <div>
+                <x-label for="cnpj" :value="__('CNPJ')" />
+
+                <x-input id="cnpj" class="block mt-1 w-full" type="text" name="cnpj" :value="old('cnpj')" required autofocus />
+            </div>
 
             <!-- Name -->
             <div>

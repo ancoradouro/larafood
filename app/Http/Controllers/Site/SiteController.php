@@ -15,4 +15,16 @@ class SiteController extends Controller
         $plans = Plan::with('details')->orderBy('price','ASC')->paginate($this->num_pagination);
         return view('site.home-index', compact('plans'));
     }
+
+    public function plan($url)
+    {
+        if(!$plan = Plan::where('url', $url)->first())
+        {
+            return redirect()->back();
+        }
+
+        //session()->put('plan', $plan);
+
+        return redirect()->router('register', $url);
+    }
 }
