@@ -20,7 +20,7 @@ class Tenant extends Model
         'url', 
         'email', 
         'logo', 
-        'active', 
+        'active',
         'subscription',
         'expires_at',
         'subscription_id', 

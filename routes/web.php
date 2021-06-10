@@ -3,17 +3,36 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
     PlanController,
-    DetailPlanController
+    DetailPlanController,
+    UserController,
 };
 use App\Http\Controllers\Admin\ACL\{
     PlanProfileController,
-    PermissionProfileController
+    PermissionProfileController,
 };
 use App\Http\Controllers\Site\{
-    SiteController
+    SiteController,
 };
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){
+
+    /**
+     * Routes Profile
+     */
+    //Route::any('users/search', [PlanProfileController::class, 'search'])->name('users.search');
+    //Route::get('users', [UserController::class, 'index'])->name('users.index');
+    //Route::any('users', [UserController::class, 'index')->name('users.index');
+    //Route::resource('users', 'App\\Http\\Controllers\\Admin\\UserController');
+    
+    Route::post('users',  [UserController::class, 'store'])->name('users.store');
+    Route::get('users/create',  [UserController::class, 'create'])->name('users.create');
+    Route::any('users/search', [UserController::class, 'search'])->name('users.search');
+    Route::put('users/{url}',  [UserController::class, 'update'])->name('users.update');
+    Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
+    Route::get('users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
+
     
     /**
      * Routes Plan X Profile
