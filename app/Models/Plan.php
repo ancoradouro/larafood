@@ -10,7 +10,13 @@ use Illuminate\Pagination\Paginator;
 class Plan extends Model
 {
     //use HasFactory;
-    protected $fillable = ['name', 'url', 'price', 'description'];
+    protected $fillable = [
+        'name', 
+        'url', 
+        'price', 
+        'description'
+    ];
+    
     protected $num_pagination = 3;
 
     public function __construct()
