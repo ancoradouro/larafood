@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\{
     PlanController,
     DetailPlanController,
     UserController,
+    CategoryController,
 };
 use App\Http\Controllers\Admin\ACL\{
     PlanProfileController,
@@ -16,8 +17,24 @@ use App\Http\Controllers\Site\{
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){
 
+
     /**
-     * Routes Profile
+     * Routes Permissions
+     */
+    //Route::any('categories/search', 'App\\Http\\Controllers\\Admin\\CategoryController@search')->name('categories.search');
+    //Route::resource('categories', 'App\\Http\\Controllers\\Admin\\CategoryController');
+    Route::post('categories',  [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('categories/create',  [CategoryController::class, 'create'])->name('categories.create');
+    Route::any('categories/search', [CategoryController::class, 'search'])->name('categories.search');
+    Route::put('categories/{id}',  [CategoryController::class, 'update'])->name('categories.update');
+    Route::get('categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+    Route::get('categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::delete('categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
+
+
+    /**
+     * Routes Users
      */
     //Route::any('users/search', [PlanProfileController::class, 'search'])->name('users.search');
     //Route::get('users', [UserController::class, 'index'])->name('users.index');

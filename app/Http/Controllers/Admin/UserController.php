@@ -77,7 +77,7 @@ class UserController extends Controller
         //$this->reposiroty->create($data);
         $user = new User();
         $user->name = $request->name;
-        $user->email = $request->email;
+        $user->url = $request->url;
         $user->password = bcrypt($request->password);
         $user->tenant_id = Auth::user()->tenant_id;
         $user->save();
@@ -136,12 +136,12 @@ class UserController extends Controller
         
         $data = $request->only(['name','email']);
 
-        if($request->password){
-            $data['password'] = bcrypt($request->password);
+        if($request->url){
+            $data['url'] = bcrypt($request->url);
         }
 
         $user->update($data);
-        return redirect()->route('users.index')->with('success', 'Salvo com sucesso'); ;
+        return redirect()->route('users.index')->with('success', 'Salvo com sucesso');
     }
 
     /**
