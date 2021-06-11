@@ -25,6 +25,7 @@ class StoreUpdateUser extends FormRequest
     public function rules()
     {
         $email = $this->segment(3);
+        
         return [
             'password' => 'required|string',
             'name' => 'required|string|max:255',
