@@ -169,9 +169,9 @@ class UserController extends Controller
     {
         $filters = $request->only('filter');
 
-        //$user = $this->repository->TenantUser()->find($id) ->como fazer filtros usando o scopeTenantUser
+        $users = $this->repository->TenantUser($request)->paginate($this->num_pagination);
 
-        $users = $this->repository->where(function($query) use ($request) {
+        /*$users = $this->repository->where(function($query) use ($request) {
             if ($request->filter) {
                 $query
                     ->orWhere('name', 'LIKE', "%{$request->filter}%")
@@ -181,7 +181,7 @@ class UserController extends Controller
         })
         ->TenantUser()
         ->paginate($this->num_pagination);
-        
+        */
         return view('admin.pages.users.index', compact('users', 'filters'));
     }
 }

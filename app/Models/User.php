@@ -55,14 +55,44 @@ class User extends Authenticatable
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeTenantUser(Builder $query)
+    public function scopeTenantUser(Builder $query, $request = null)
     {
-        return $query->where('tenant_id', Auth::user()->tenant_id);
+        //return $query->where('tenant_id', Auth::user()->tenant_id);
         /*
         static::addGlobalScope('tenant', function(Builder $builder){
             $builder->where('tenant_id','=', Auth::user()->tenant_id);
         });
         */
+
+        if($request){
+            if ($request->filter) {
+                $query
+                    ->orWhere('name', 'LIKE', "%{$request->filter}%")
+                    ->orWhere('email', $request->filter);
+            }
+
+            /*
+            [pesquisar como buscar campos de forma dinamica para fazer os filtros]
+            $termos = $request->only('name', 'email');           
+            foreach ($termos as $nome => $valor) {
+                if ($valor) { 
+                    $query->orWhere($nome, 'LIKE', '%' . $value . '%');
+                }
+            }
+            
+            $iguais = $request->only('tenant_id');
+            foreach ($iguais as $nome => $valor) {
+                if ($valor) { 
+                    $query->orWhere($nome, '=', $value);
+                }
+            }
+            */
+
+            $query->where('tenant_id', '=', Auth::user()->tenant_id);
+            //dd($query->toSql());
+        }
+        
+        return $query;
     }
 
     public function tenants()
