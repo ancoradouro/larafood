@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\{
+    Auth,
+    DB,
+};
 
 class CategoryController extends Controller
 {
@@ -49,7 +52,7 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUpdaCategory $request)
     {
         //$data = $request->all();
         //$data['tenant_id'] = Auth::user()->tenant_id;
@@ -73,15 +76,15 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = $this->category->latest()->find($id);
+        //$category = $this->category->latest()->find($id);
         
-        /*$user = DB::table('categories')
+        $category = DB::table('categories')
             ->where('tenant_id', '=', Auth::user()->tenant_id)
             ->where('id', '=', $id)
             ->select(['*'])
             //->toSql();
             ->first();
-        */
+        
         if (!$category){
             return redirect()->back();
         }else return view('admin.pages.categories.show', compact('category'));
