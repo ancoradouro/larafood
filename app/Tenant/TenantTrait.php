@@ -3,7 +3,7 @@
 namespace App\Tenant;
 
 use App\Tenant\{
-    TenantObservers,
+    TenantObserver,
     TenantScope,
 };
 
@@ -16,7 +16,7 @@ trait TenantTrait
      */
     protected static function booted()
     {
-        static::observe(TenantObservers ::class);
+        static::observe(TenantObserver::class);
 
         static::addGlobalScope(new TenantScope);
     }

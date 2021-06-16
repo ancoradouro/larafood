@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\{
     DetailPlanController,
     UserController,
     CategoryController,
+    ProductController,
 };
 use App\Http\Controllers\Admin\ACL\{
     PlanProfileController,
@@ -17,6 +18,18 @@ use App\Http\Controllers\Site\{
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){
 
+
+     /**
+     * Routes Products
+     */
+    Route::post('products',  [ProductController::class, 'store'])->name('products.store');
+    Route::get('products/create',  [ProductController::class, 'create'])->name('products.create');
+    Route::any('products/search', [ProductController::class, 'search'])->name('products.search');
+    Route::put('products/{id}',  [ProductController::class, 'update'])->name('products.update');
+    Route::get('products/{id}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::delete('products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::get('products', [ProductController::class, 'index'])->name('products.index');
 
     /**
      * Routes Permissions
