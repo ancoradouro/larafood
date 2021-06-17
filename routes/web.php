@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\{
     CategoryController,
     ProductController,
     CategoryProductController,
+    TableController,
 };
 use App\Http\Controllers\Admin\ACL\{
     PlanProfileController,
@@ -18,6 +19,19 @@ use App\Http\Controllers\Site\{
 };
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){
+
+
+     /**
+     * Routes tables
+     */
+    Route::post('tables',  [TableController::class, 'store'])->name('tables.store');
+    Route::get('tables/create',  [TableController::class, 'create'])->name('tables.create');
+    Route::any('tables/search', [TableController::class, 'search'])->name('tables.search');
+    Route::put('tables/{id}',  [TableController::class, 'update'])->name('tables.update');
+    Route::get('tables/{id}', [TableController::class, 'show'])->name('tables.show');
+    Route::get('tables/{id}/edit', [TableController::class, 'edit'])->name('tables.edit');
+    Route::delete('tables/{id}', [TableController::class, 'destroy'])->name('tables.destroy');
+    Route::get('tables', [TableController::class, 'index'])->name('tables.index');
 
     /**
      * Routes Product X category

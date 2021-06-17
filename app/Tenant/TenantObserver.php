@@ -5,6 +5,7 @@ namespace App\Tenant;
 use App\Tenant\TenantManager;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class TenantObserver
 {
@@ -19,5 +20,6 @@ class TenantObserver
         $managerTenant = app(TenantManager::class);
 
         $model->tenant_id = $managerTenant->getTenantIdentify();
+        $model->uuid =  (string)Str::uuid();
     }
 }
