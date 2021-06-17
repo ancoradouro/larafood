@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\{
     UserController,
     CategoryController,
     ProductController,
+    CategoryProductController,
 };
 use App\Http\Controllers\Admin\ACL\{
     PlanProfileController,
@@ -18,6 +19,14 @@ use App\Http\Controllers\Site\{
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){
 
+    /**
+     * Routes Product X category
+     */
+    Route::get('products/{id}/category/{idCategory}/detach', [CategoryProductController::class, 'detachCategoryProduct'])->name('products.category.detach');
+    Route::post('products/{id}/categories', [CategoryProductController::class, 'attachCategoriesProduct'])->name('products.categories.attach');
+    Route::any('products/{id}/categories/create', [CategoryProductController::class, 'categoriesAvailable'])->name('products.categories.available');
+    Route::get('products/{id}/categories', [CategoryProductController::class, 'categories'])->name('products.categories');
+    Route::get('categories/{id}/products', [CategoryProductController::class, 'products'])->name('categories.products');
 
      /**
      * Routes Products

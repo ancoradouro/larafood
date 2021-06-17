@@ -27,7 +27,6 @@ class DetailPlanController extends Controller
         if (!$plan = $this->plan->where('id', $idPlan)->first()) {
             return redirect()->back();
         }
-
         //$details = $plan->details();
         $details = $plan->details()->paginate($this->num_pagination);
 
@@ -52,8 +51,6 @@ class DetailPlanController extends Controller
         if (!$plan = $this->plan->where('url', $urlPlan)->first()) {
             return redirect()->back();
         }
-
-
         //$data = $request->all();
         //$data['plans_id'] = $plan->id;
         //$this->repository->create();

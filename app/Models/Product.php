@@ -22,7 +22,28 @@ class Product extends Model
 
     public function categories()
     {
-        $this->belongsToMany(Category::class); // muitos para muitos
+        return $this->belongsToMany(Category::class); // muitos para muitos
+    }
+
+    /**
+     * Categories not linked with this product
+     */
+    public function categoriesAvailable($filter = null)
+    {
+        $categories = Category::whereNotIN('categories.id', function($query){
+                $query->select('category_product.category_id');
+                $query->from('category_product');
+                $query->whereRaw("category_product.product_id={$this->id}");
+            })// where para o filtro
+            ->where(function($queryFilter) use($filter){
+                if ($filter)
+                    $queryFilter->where('categories.name', 'LIKE', "%$filter%");
+            })
+            ->paginate();
+            //->toSql();
+            //dd($categories);
+
+        return $categories;
     }
 }
 
