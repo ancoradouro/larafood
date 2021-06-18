@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', "Editar a mesa - {$table->name}")
+@section('title', "Editar a mesa - {$table->identify}")
 
 @section('content_header')
-    <h1>Editar a Mesa - {{ $table->name }}</h1>
+    <h1>Editar a Mesa - {{ $table->identify }}</h1>
 
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('tables.index') }}" class="active">Voltar</a></li>
@@ -22,7 +22,7 @@
             <form action="{{ route('tables.destroy', $table->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger"> <i class="fas fa-minus-square"></i> Deletar a Mesa {{ $table->name }}</button>
+                <button type="submit" class="btn btn-danger"> <i class="fas fa-minus-square"></i> Deletar a Mesa {{ $table->identify }}</button>
             </form>
         </div>
     </div>
