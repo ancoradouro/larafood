@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\{
     User,
     Tenant,
@@ -21,6 +22,8 @@ class UserController extends Controller
     public function __construct(User $user)
     {
         $this->repository = $user;
+
+        $this->middleware(['can:users']);
     }
 
 
@@ -77,7 +80,7 @@ class UserController extends Controller
         //$this->reposiroty->create($data);
         $user = new User();
         $user->name = $request->name;
-        $user->url = $request->url;
+        $user->url = Str::kebab($request->name);
         $user->password = bcrypt($request->password);
         $user->tenant_id = Auth::user()->tenant_id;
         $user->save();

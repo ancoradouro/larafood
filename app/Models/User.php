@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Teste de commit - 
- */
-
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -12,10 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
+use App\Models\Traits\UserACLTrait;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, UserACLTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -95,16 +92,42 @@ class User extends Authenticatable
         return $query;
     }
 
-    public function tenants()
+    public function tenant()
     {
         return $this->belongsTo(Tenant::class);
     }
-/*
-    public function tenant()
+
+
+    /**
+     * Get Roles
+     */
+    public function roles()
     {
-        return $this->hasMany(Tenant::class);
+        return $this->belongsToMany(Role::class);
     }
-*/
+
+
+    /**
+     * Roles not linked with this profile
+     */
+    public function rolesAvailable($filter = null)
+    {
+        $roles = Role::whereNotIN('roles.id', function($query){
+            $query
+                ->select('role_user.role_id')
+                ->from('role_user')
+                ->whereRaw("role_user.user_id={$this->id}");
+        })
+        ->where(function($queryFilter) use($filter){
+            if ($filter)$queryFilter->where('roles.name', 'LIKE', "%$filter%");
+        })
+        ->paginate($this->num_pagination);
+        //->toSql();
+        //dd($roles);
+
+        return $roles;
+    }
+
   
 
 }

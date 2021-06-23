@@ -3,7 +3,10 @@
 @section('title', 'Categoria')
 
 @section('content_header')
-    <h1>Categoria <a href="{{ route('categories.create') }}" class="btn btn-dark"> <i class="fas fa-plus-square"></i> ADD</a> </h1>
+
+    @can('category_add')
+        <h1>Categoria <a href="{{ route('categories.create') }}" class="btn btn-dark"> <i class="fas fa-plus-square"></i> ADD</a> </h1>        
+    @endcan
 
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>

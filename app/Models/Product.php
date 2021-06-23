@@ -39,7 +39,7 @@ class Product extends Model
                 if ($filter)
                     $queryFilter->where('categories.name', 'LIKE', "%$filter%");
             })
-            ->paginate();
+            ->paginate($this->num_pagination);
             //->toSql();
             //dd($categories);
 

@@ -1,14 +1,14 @@
 @extends('adminlte::page')
 
-@section('title', "Planos do perfil {$profile->name}")
+@section('title', 'Permissões do Cargo {$role->name}')
 
 @section('content_header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('profiles.index') }}">Perfis</a></li>
-        <li class="breadcrumb-item active"><a href="{{ route('profiles.plans', $profile->id) }}" class="active">Planos</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('roles.index') }}" class="active">Cargos</a></li>
     </ol>
-    <h1>Planos do perfil <strong> {{ $profile->name }} </strong> </h1>
+    <h1>Permissões do Cargo <strong> {{ $role->name }} </strong></h1>
+    <a href="{{ route('roles.permissions.available', $role->id ) }}" class="btn btn-dark"> <i class="fas fa-plus-square"></i> ADD NOVA PERMISSÂO</a>
 @stop
 
 @section('content')
@@ -22,11 +22,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($plans as $plan)
+                @foreach ($permissions as $permission)
                     <tr>
-                        <td>{{ $plan->name }}</td>
+                        <td>{{ $permission->name }}</td>
                         <td style="width:250px;">
-                            <a href="{{ route('plans.profile.detach', [$plan->id, $profile->id]) }}" class="btn btn-danger"> <i class="fas fa-unlink"></i> Desvincular</a>
+                            <a href="{{ route('roles.permission.detach', [$role->id, $permission->id]) }}" class="btn btn-danger">Desvincular</a>
                         </td>
                     </tr>
                 @endforeach
@@ -35,10 +35,10 @@
     </div>
     <div class="card-footer">
         @if (isset($filters))
-            {{-- {!! $plans->links() !!} --}}
-            {!! $plans->appends($filters)->links() !!}
+            {{-- {!! $roles->links() !!} --}}
+            {!! $permissions->appends($filters)->links() !!}
         @else
-            {!! $plans->links() !!}
+            {!! $permissions->links() !!}
         @endif
     </div>
 </div>

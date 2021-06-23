@@ -9,10 +9,14 @@ use App\Http\Controllers\Admin\{
     ProductController,
     CategoryProductController,
     TableController,
+    TenantController,
 };
 use App\Http\Controllers\Admin\ACL\{
     PlanProfileController,
     PermissionProfileController,
+    RoleController,
+    PermissionRoleController,
+    RoleUserController,
 };
 use App\Http\Controllers\Site\{
     SiteController,
@@ -20,14 +24,57 @@ use App\Http\Controllers\Site\{
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){
 
+    Route::get('teste-acl', function(){
 
+        dd( Auth::user()->permissions() );
+
+    });
+
+
+    /**
+     * Role x User
+     */
+    Route::get('users/{id}/role/{idRole}/detach', [RoleUserController::class,'detachRoleUser'])->name('users.role.detach');
+    Route::post('users/{id}/roles', [RoleUserController::class, 'attachRolesUser'])->name('users.roles.attach');
+    Route::any('users/{id}/roles/create', [RoleUserController::class, 'rolesAvailable'])->name('users.roles.available');
+    Route::get('users/{id}/roles', [RoleUserController::class, 'roles'])->name('users.roles');
+    Route::get('roles/{id}/users', [RoleUserController::class, 'users'])->name('roles.users');
+
+    /**
+     * Routes Permissions X Role
+     */
+    Route::get('role/{id}/permission/{idPermission}/detach', [PermissionRoleController::class, 'detachPermissionRole'])->name('roles.permission.detach');
+    Route::post('role/{id}/permissions', [PermissionRoleController::class, 'attachPermissionsRole'])->name('roles.permissions.attach');
+    Route::any('role/{id}/permissions/create', [PermissionRoleController::class, 'permissionsAvailable'])->name('roles.permissions.available');
+    Route::get('role/{id}/permissions', [PermissionRoleController::class, 'permissions'])->name('roles.permissions');
+    Route::get('permissions/{id}/role', [PermissionRoleController::class, 'role'])->name('permissions.roles');
+
+
+     /**
+     * Routes 
+     */
+    Route::post('roles', [RoleController::class, 'store'])->name('roles.store');
+    Route::get('roles/create', [RoleController::class, 'create'])->name('roles.create');
+    Route::any('roles/search', [RoleController::class, 'search'])->name('roles.search');
+    Route::put('roles/{id}', [RoleController::class, 'update'])->name('roles.update');
+    Route::get('roles/{id}', [RoleController::class, 'show'])->name('roles.show');
+    Route::get('roles/{id}/edit', [RoleController::class, 'edit'])->name('roles.edit');
+    Route::delete('roles/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
+    Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
+   
+    /**
+     * Routes Tenants
+     */
+    Route::any('tenants/search', [TenantController::class, 'search'])->name('tenants.search');
+    Route::resource('tenants', 'App\\Http\\Controllers\\Admin\\TenantController');
+    
      /**
      * Routes tables
      */
-    Route::post('tables',  [TableController::class, 'store'])->name('tables.store');
-    Route::get('tables/create',  [TableController::class, 'create'])->name('tables.create');
+    Route::post('tables', [TableController::class, 'store'])->name('tables.store');
+    Route::get('tables/create', [TableController::class, 'create'])->name('tables.create');
     Route::any('tables/search', [TableController::class, 'search'])->name('tables.search');
-    Route::put('tables/{id}',  [TableController::class, 'update'])->name('tables.update');
+    Route::put('tables/{id}', [TableController::class, 'update'])->name('tables.update');
     Route::get('tables/{id}', [TableController::class, 'show'])->name('tables.show');
     Route::get('tables/{id}/edit', [TableController::class, 'edit'])->name('tables.edit');
     Route::delete('tables/{id}', [TableController::class, 'destroy'])->name('tables.destroy');
@@ -45,10 +92,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
      /**
      * Routes Products
      */
-    Route::post('products',  [ProductController::class, 'store'])->name('products.store');
-    Route::get('products/create',  [ProductController::class, 'create'])->name('products.create');
+    Route::post('products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
     Route::any('products/search', [ProductController::class, 'search'])->name('products.search');
-    Route::put('products/{id}',  [ProductController::class, 'update'])->name('products.update');
+    Route::put('products/{id}', [ProductController::class, 'update'])->name('products.update');
     Route::get('products/{id}', [ProductController::class, 'show'])->name('products.show');
     Route::get('products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::delete('products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
@@ -116,7 +163,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
      * Routes Profile
      */
     Route::any('profiles/search', 'App\\Http\\Controllers\\Admin\\ACL\\ProfileController@search')->name('profiles.search');
-    Route::resource('profiles', 'App\\Http\\Controllers\\Admin\\ACL\\ProfileController');
+    Route::resource('profiles', 'App\\Http\\Controllers\\Admin\\ACL\\ProfileController')->middleware('can:profile');
 
     /**
      * Routes Plans
