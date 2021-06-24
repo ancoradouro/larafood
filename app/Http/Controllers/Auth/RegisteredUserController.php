@@ -22,7 +22,7 @@ use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
 {
-    public $plan;
+    protected $plan;
 
     public function __construct(Plan $plan)
     {
@@ -58,7 +58,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'cnpj' => 'required|regex:/^\d{2}\.\d{3}\.\d{3}\/\d{4}\\-\d{2}$/'
+            //'cnpj' => 'required|regex:/^\d{2}\.\d{3}\.\d{3}\/\d{4}\\-\d{2}$/',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);

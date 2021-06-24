@@ -23,7 +23,7 @@ trait UserACLTrait
         return $permissions;
     }
 
-    /*
+
     public function permissionsPlan(): array
     {
         // $tenant = $this->tenant;
@@ -54,7 +54,6 @@ trait UserACLTrait
 
         return $permissions;
     }
-    */
 
     public function hasPermission(string $permissionName): bool
     {
