@@ -3,7 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Api\TenantApiController;
+use App\Http\Controllers\Api\{
+    TenantApiController,
+    CategoryApiController,
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +28,7 @@ Route::get('/greeting', function () { return 'Hello World'; });
 
 Route::get('/tenants/{id}', [TenantApiController::class, 'show']);
 Route::get('/tenants', [TenantApiController::class, 'index']);
+
+Route::get('/categories', [CategoryApiController::class, 'categoriesByTenants']);
+
 
