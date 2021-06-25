@@ -15,16 +15,15 @@ class TenantService
         $this->repository = $repository;
     }
 
-    public function getAllTenants()//int $per_page)
+    public function getAllTenants(int $per_page)
     {
-        //return $this->repository->getAllTenants($per_page);
-        return $this->repository->getAllTenants();
+        return $this->repository->getAllTenants($per_page);
     }
-/*
-    public function getTenantByUuid(string $uuid)
+
+    public function getTenantById(string $Id)
     {
-        return $this->repository->getTenantByUuid($uuid);
-    }*/
+        return $this->repository->getTenantById($Id);
+    }
 
     public function make(Plan $plan, array $data)
     {

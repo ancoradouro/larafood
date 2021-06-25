@@ -23,4 +23,6 @@ use App\Http\Controllers\Api\TenantApiController;
 
 Route::get('/greeting', function () { return 'Hello World'; });
 
+Route::get('/tenants/{id}', [TenantApiController::class, 'show']);
 Route::get('/tenants', [TenantApiController::class, 'index']);
+

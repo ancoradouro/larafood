@@ -22,7 +22,7 @@ class TenantResource extends JsonResource
             'name' => $this->name,
             'url' => $this->url,
             'email' => $this->email,
-            'logo' => $this->logo,
+            'logo' => $this->logo ? url("storage/{$this->logo}") : null,
             'active' => $this->active,
             'subscription' => $this->subscription,
             'expires_at' => $this->expires_at,
