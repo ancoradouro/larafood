@@ -25,9 +25,7 @@ use App\Http\Controllers\Site\{
 Route::middleware(['auth'])->prefix('admin')->group(function(){
 
     Route::get('teste-acl', function(){
-
         dd( Auth::user()->permissions() );
-
     });
 
 

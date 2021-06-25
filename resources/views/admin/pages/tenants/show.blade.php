@@ -49,10 +49,10 @@
                     <strong>Identificador: </strong> {{ $tenant->subscription_id }}
                 </li>
                 <li>
-                    <strong>Ativo: </strong> {{ $tenant->subscription_active == 'Y' ? 'SIM' : 'NÃO' }}
+                    <strong>Ativo: </strong> {{ $tenant->subscription_active == '1' ? 'SIM' : 'NÃO' }}
                 </li>
                 <li>
-                    <strong>Cancelou: </strong> {{ $tenant->subscription_suspended == 'Y' ? 'SIM' : 'NÃO' }}
+                    <strong>Cancelou: </strong> {{ $tenant->subscription_suspended == '1' ? 'SIM' : 'NÃO' }}
                 </li>
             </ul>
 
