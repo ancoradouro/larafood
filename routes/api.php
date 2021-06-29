@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\{
     TenantApiController,
     CategoryApiController,
+    TableApiController,
+    ProductApiController,
 };
 
 /*
@@ -29,6 +31,13 @@ Route::get('/greeting', function () { return 'Hello World'; });
 Route::get('/tenants/{id}', [TenantApiController::class, 'show']);
 Route::get('/tenants', [TenantApiController::class, 'index']);
 
+Route::get('/categories/{url}', [CategoryApiController::class, 'show']);
 Route::get('/categories', [CategoryApiController::class, 'categoriesByTenants']);
+
+Route::get('/tables/{identify}', [TableApiController::class, 'show']);
+Route::get('/tables', [TableApiController::class, 'tablesByTenant']);
+
+Route::get('/products', [ProductApiController::class, 'productsByTenant']);
+
 
 
