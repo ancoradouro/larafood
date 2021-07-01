@@ -14,13 +14,25 @@ class ProductRepository implements ProductRepositoryInterface
         $this->table = 'products';
     }
 
-    public function getProductByTenantId(string $id)
+    public function getProductByTenantId(string $id, array $categories)
     {
         return DB::table($this->table)
-                //->join('tenants', 'tenants.id', '=', 'products.tenant_id')
-                ->where('tenant_id', $id)
-                ->select('products.*')
+                ->join('category_product', 'category_product.product_id', '=', 'products.id')
+                ->join('categories', 'category_product.category_id', '=', 'categories.id')
+                ->where('products.tenant_id', $id)
+                ->where('categories.tenant_id', $id)
+                ->where(function($query) use ($categories) {
+                    if(!empty($categories))$query->whereIn('categories.id', $categories);
+                })
+                //->select('products.*')
                 ->get();
+    }
+
+    public function getProductByFlag(string $flag)
+    {
+        return DB::table($this->table)
+                    ->where('flag', $flag)
+                    ->first();
     }
 
 }

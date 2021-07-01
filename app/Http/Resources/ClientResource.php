@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductResource extends JsonResource
+class ClientResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,12 +14,10 @@ class ProductResource extends JsonResource
      */
     public function toArray($request)
     {
+        //return parent::toArray($request);
         return [
-            'tenant_id' => $this->tenant_id,
-            'flag' => $this->flag,
-            'image' => url("storage/{$this->image}"),
-            'price' => $this->price,
-            'description' => $this->description,
+            'name' => $this->name,
+            'email' => $this->email,
         ];
     }
 }

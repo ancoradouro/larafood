@@ -23,7 +23,23 @@ class ProductApiController extends Controller
         // }
 
         //return $this->productService->getCategoriesById($request->id);
-        return ProductResource::collection($this->productService->getProductsByTenantId($request->token_company));
+
+        //return response()->json(  $request->get('categories', []) );
+
+        $products = $this->productService->getProductsByTenantId(
+            $request->token_company,
+            $request->get('categories', [])
+        );
+        return ProductResource::collection($products);
+    }
+
+    public function show(TenantFormRequest $request, $flag)
+    {
+        if(!$product = $this->productService->getProductByFlag($flag)){
+            return response()->json(['message' => 'Product Not Found'], 404);
+        }
+
+        return new ProductResource($product);
     }
 
 }

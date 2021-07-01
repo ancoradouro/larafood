@@ -21,6 +21,13 @@ use App\Http\Controllers\Admin\ACL\{
 use App\Http\Controllers\Site\{
     SiteController,
 };
+use App\Models\Client;
+
+Route::get('teste', function(){
+    $client = Client::first();
+    $token = $client->createToken('token-teste', ['*']);
+    dd($token->plainTextToken);
+});
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){
 
