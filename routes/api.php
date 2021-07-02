@@ -9,7 +9,11 @@ use App\Http\Controllers\Api\{
     TableApiController,
     ProductApiController,
 };
-use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\Auth\{
+    RegisterController,
+    AuthClientController,
+};
+use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +29,17 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
+
+Route::post('/sanctum/token', [AuthClientController::class, 'auth']);
+
+Route::group([
+    'middleware' => ['auth:sanctum']
+], function(){
+    Route::get('/auth/me', [AuthClientController::class, 'me']);
+    Route::post('/auth/logout', [AuthClientController::class, 'logout']);
+});
+
+
 
 Route::group([
     'prefix' => 'v1',
@@ -45,6 +60,7 @@ Route::group([
     Route::get('/products', [ProductApiController::class, 'productsByTenant']);
 
     Route::post('/client', [RegisterController::class, 'store']);
+    
 });
 
 
