@@ -52,7 +52,7 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdaCategory $request)
+    public function store(Request $request)
     {
         //$data = $request->all();
         //$data['tenant_id'] = Auth::user()->tenant_id;

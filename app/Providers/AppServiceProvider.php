@@ -5,14 +5,15 @@ namespace App\Providers;
 
 use App\Models\{
     Plan,
-    Tenant,
     Category,
     Product,
+    Client,
 };
 use App\Observers\{
     PlanObserver,
     CategoryObserver,
     ProductObserver,
+    ClientObserver,
 };
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Contracts\TenantRepositoryInterface;
@@ -43,5 +44,6 @@ class AppServiceProvider extends ServiceProvider
         Plan::observe(PlanObserver::class);
         Category::observe(CategoryObserver::class);
         Product::observe(ProductObserver::class);
+        Client::observe(ClientObserver::class);
     }
 }

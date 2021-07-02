@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\{
     Auth,
     Storage,
 };
-//use Illuminate\Support\Str;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -53,7 +53,6 @@ class ProductController extends Controller
     {
         $data = $request->all();
 
-        //dd($request->all());
         if($request->hasFile('image') && $request->image->isValid()){
             $tenant = Auth::user()->tenant_id;
             $data['image'] = $request->image->store("tenants/{$tenant}/products");
