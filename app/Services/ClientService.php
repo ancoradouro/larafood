@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Repositories\Contracts\{
     ClientRepositoryInterface,
-    TenantRepositoryInterface,
 };
 
 class ClientService

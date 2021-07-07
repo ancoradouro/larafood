@@ -36,4 +36,11 @@ class TableRepository implements TableRepositoryInterface
                     ->where('identify', $identify)
                     ->first();
     }
+
+    public function getTableByUuid(string $uuid)
+    {
+        return DB::table($this->table)
+                    ->where('uuid', $uuid)
+                    ->first();
+    }
 }

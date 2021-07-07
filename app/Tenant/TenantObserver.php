@@ -18,8 +18,10 @@ class TenantObserver
     public function creating(Model $model)
     {
         $managerTenant = app(TenantManager::class);
-
-        $model->tenant_id = $managerTenant->getTenantIdentify();
-        $model->uuid =  (string)Str::uuid();
+        $identify = $managerTenant->getTenantIdentify();
+        if($identify){
+            $model->tenant_id = $identify;
+            $model->uuid = (string)Str::uuid();
+        }
     }
 }

@@ -33,4 +33,8 @@ class CategoryRepository implements CategoryRepositoryInterface
         return DB::table($this->table)->where('url', $url)->first();
     }
     
+    public function getCategoryByUuid(string $uuid)
+    {
+        return DB::table($this->table)->where('uuid', $uuid)->first();
+    }
 }

@@ -17,6 +17,7 @@ class TenantResource extends JsonResource
         return [
             'name' => $this->name,
             'id' => $this->id,
+            'uuid' => $this->uuid,
             'plan_id' => $this->plan_id,
             'cnpj' => $this->cnpj,
             'name' => $this->name,

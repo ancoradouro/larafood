@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\{
     TenantApiController,
     CategoryApiController,
+    OrderApiController,
     TableApiController,
     ProductApiController,
 };
@@ -50,16 +51,19 @@ Route::group([
     Route::get('/tenants/{id}', [TenantApiController::class, 'show']);
     Route::get('/tenants', [TenantApiController::class, 'index']);
 
-    Route::get('/categories/{url}', [CategoryApiController::class, 'show']);
+    Route::get('/categories/{identify}', [CategoryApiController::class, 'show']);
     Route::get('/categories', [CategoryApiController::class, 'categoriesByTenants']);
 
     Route::get('/tables/{identify}', [TableApiController::class, 'show']);
     Route::get('/tables', [TableApiController::class, 'tablesByTenant']);
 
-    Route::get('/products/{flag}', [ProductApiController::class, 'show']);
+    Route::get('/products/{identify}', [ProductApiController::class, 'show']);
     Route::get('/products', [ProductApiController::class, 'productsByTenant']);
 
     Route::post('/client', [RegisterController::class, 'store']);
+
+    Route::post('/orders', [OrderApiController::class, 'store']);
+    Route::post('/orders/{identify}', [OrderApiController::class, 'show']);
     
 });
 

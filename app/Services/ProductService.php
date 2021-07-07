@@ -28,4 +28,9 @@ class ProductService
     {
         return $this->productRepository->getProductByFlag($flag);
     }
+
+    public function getProductByUuid(string $uuid)
+    {
+        return $this->productRepository->getProductByUuid($uuid);
+    }
 }

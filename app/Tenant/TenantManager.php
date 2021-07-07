@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Auth;
 
 Class TenantManager
 {
-    public function getTenantIdentify() : int
+    public function getTenantIdentify()
     {
-        return Auth::user()->tenant_id;
+        return Auth::check() ? Auth::user()->tenant_id : '';
     }
 
-    public function getTenant(): Tenant
+    public function getTenant()
     {
-        return Auth::user()->tenant; //Retorna o relacionamento de user com tenant
+        return Auth::check() ? Auth::user()->tenant : ''; //Retorna o relacionamento de user com tenant
     }
 
     public function isAdmin() : bool

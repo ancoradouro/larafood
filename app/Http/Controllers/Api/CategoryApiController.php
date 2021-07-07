@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Api\CategoryApiController;
+//use App\Http\Controllers\Api\CategoryApiController;
 use App\Http\Resources\CategoryResource;
 use App\Http\Requests\Api\TenantFormRequest;
 use App\Services\CategoryService;
-use Illuminate\Http\Request;
-
 
 class CategoryApiController extends Controller
 {
@@ -31,9 +29,9 @@ class CategoryApiController extends Controller
     }
 
 
-    public function show(TenantFormRequest $request, $url)
+    public function show(TenantFormRequest $request, $identify)
     {
-        if(!$category = $this->CategoryService->getCategoryByUrl($url)){
+        if(!$category = $this->CategoryService->getCategoryByUuid($identify)){
             return response()->json([
                 'message' => 'Category Not Found'
             ], 404);

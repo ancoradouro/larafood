@@ -24,6 +24,12 @@ class CreateProductsTable extends Migration
                 $table->double('price', 10, 2);
                 $table->text('description');
                 $table->timestamps();
+            
+
+                $table->foreign('tenant_id')
+                    ->references('id')
+                    ->on('tenants')
+                    ->onDelete('cascade');
             });
         }
 
